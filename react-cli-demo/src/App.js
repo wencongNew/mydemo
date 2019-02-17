@@ -4,10 +4,14 @@ import './App.css';
 import Mypanel from './panel.js';
 import './customInput.css';
 import './common.css';
+import { Menu, Tree} from 'antd';
+import { Card ,Tabs} from 'antd';
+import "antd/dist/antd.css"; // 要引入ant 样式
 class App extends Component {
   constructor(props) {
     super(props);
     this.mypanel = React.createRef();
+
     this.state = {
       isToggleOn: true,
       value:"TODOList",
@@ -77,16 +81,66 @@ class App extends Component {
     return data;
   }
   render() {
+    const style = {
+      width: '400px',
+      margin: '30px',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+      border: '1px solid #e8e8e8',
+    };
+    const MenuStyle = {
+      width: '400px',
+      margin: '30px',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+      border: '1px solid #e8e8e8',
+    };
+    const TreeNode = Tree.TreeNode;
     return (
-      <div className="App">
-        添加TODOList
-        <div>
-        <input className="customInput" type="text" value={this.state.value} onChange={this.handleChange}></input>
-        <button className="button" onClick={this.addTODOList}>添加</button>
-        </div>
-        { this.state.panel.map((panel,index) =>
-    <Mypanel key={index.toString()} id={index} list={this.state.panel[index].Mypanel.list} name={panel.Mypanel.name} clearData={this.clearData} sonToFather={this.sonToFather}/>
-  )}
+      <div className='APP'>
+        <Tabs defaultActiveKey="1">
+          <Tabs.TabPane tab="Tab 1" key="1">
+            <Card style={style} actions={[<a>操作一</a>, <a>操作二</a>]}>
+            </Card>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Tab 2" key="2">
+            <Menu style={MenuStyle}>
+              <Menu.Item>菜单项</Menu.Item>
+              <Menu.SubMenu title="子菜单">
+                <Menu.Item>子菜单项</Menu.Item>
+              </Menu.SubMenu>
+              <Menu.SubMenu title="子菜单">
+                <Menu.Item>子菜单项1</Menu.Item>
+              </Menu.SubMenu>
+              <Menu.SubMenu title="子菜单">
+                <Menu.Item>子菜单项2</Menu.Item>
+              </Menu.SubMenu>
+              <Menu.SubMenu title="子菜单">
+                <Menu.Item>子菜单项3</Menu.Item>
+              </Menu.SubMenu>
+            </Menu>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Tab 3" key="3">
+            <Tree
+              showLine
+              defaultExpandedKeys={['0-0-0']}
+              onSelect={this.onSelect}
+            >
+              <TreeNode title="parent 1" key="0-0">
+                <TreeNode title="parent 1-0" key="0-0-0">
+                  <TreeNode title="leaf" key="0-0-0-0" />
+                  <TreeNode title="leaf" key="0-0-0-1" />
+                  <TreeNode title="leaf" key="0-0-0-2" />
+                </TreeNode>
+                <TreeNode title="parent 1-1" key="0-0-1">
+                  <TreeNode title="leaf" key="0-0-1-0" />
+                </TreeNode>
+                <TreeNode title="parent 1-2" key="0-0-2">
+                  <TreeNode title="leaf" key="0-0-2-0" />
+                  <TreeNode title="leaf" key="0-0-2-1" />
+                </TreeNode>
+              </TreeNode>
+            </Tree>
+          </Tabs.TabPane>
+        </Tabs>
       </div>
     );
   }
