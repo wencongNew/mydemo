@@ -6,6 +6,7 @@
     "antd": "^3.13.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-intl": "^2.8.0",
     "react-scripts": "2.1.1"
   },
   "scripts": {
@@ -24,6 +25,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "prop-types": "^15.7.2",
     "webpack": "^4.19.1"
   }
 }

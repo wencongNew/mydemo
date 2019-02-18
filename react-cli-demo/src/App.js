@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Mypanel from './panel.js';
+import JavaScriptTc from './JavaScriptTc.jsx';
 import './customInput.css';
 import './common.css';
-import { Menu, Tree} from 'antd';
-import { Card ,Tabs} from 'antd';
+import { Menu, Tree } from 'antd';
+import { Card, Tabs } from 'antd';
 import "antd/dist/antd.css"; // 要引入ant 样式
 class App extends Component {
   constructor(props) {
@@ -14,70 +15,70 @@ class App extends Component {
 
     this.state = {
       isToggleOn: true,
-      value:"TODOList",
-      panel:[
+      value: "TODOList",
+      panel: [
         {
-            id:0,
-            Mypanel:{
-              "name":"未完成",
-              list:[]
-            }
+          id: 0,
+          Mypanel: {
+            "name": "未完成",
+            list: []
+          }
         },
         {
-            id:1,
-              Mypanel:{
-              "name":"已完成",
-              list:[]
-            }
+          id: 1,
+          Mypanel: {
+            "name": "已完成",
+            list: []
+          }
         }
       ]
     };
-     this.addTODOList = this.addTODOList.bind(this);
-     this.clearData = this.clearData.bind(this);
-     this.sonToFather = this.sonToFather.bind(this);
-     this.handleChange = this.handleChange.bind(this);
+    this.addTODOList = this.addTODOList.bind(this);
+    this.clearData = this.clearData.bind(this);
+    this.sonToFather = this.sonToFather.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  handleChange(e){
-    this.setState({value:e.target.value});
+  handleChange(e) {
+    this.setState({ value: e.target.value });
 
   }
-  addTODOList(){
+  addTODOList() {
     let data = this.state.panel;
     data[0].Mypanel.list.push(
       {
-        value:this.state.value,
-        flag:false
+        value: this.state.value,
+        flag: false
       }
     );
     this.setState({
-      panel:data
+      panel: data
     });
   }
-  sonToFather(event){
-   let data = this.setPanel(this.state.panel,event.id,{flag:event.checked},event.mypanelIndex);
-   this.setState({
-      panel:data
-    });
-  }
-  clearData(id){
-    let data = this.clearPanel(this.state.panel,id);
+  sonToFather(event) {
+    let data = this.setPanel(this.state.panel, event.id, { flag: event.checked }, event.mypanelIndex);
     this.setState({
-      panel:data
+      panel: data
+    });
+  }
+  clearData(id) {
+    let data = this.clearPanel(this.state.panel, id);
+    this.setState({
+      panel: data
     });
 
   }
-  clearPanel(data,id){
+  clearPanel(data, id) {
     data[id].Mypanel.list = [];
     return data;
   }
-  setPanel(data,index,keyValueObj,myPanelIndex){
+  setPanel(data, index, keyValueObj, myPanelIndex) {
     // 操作对象Mypanel0还是Mypanel1
-    for(let key in keyValueObj ){
+    for (let key in keyValueObj) {
       data[myPanelIndex].Mypanel.list[index][key] = keyValueObj[key];
     }
-    let Paneled = myPanelIndex ? 0 :1; // 带新增元素的数组
-    data[Paneled].Mypanel.list.push( data[myPanelIndex].Mypanel.list[index]); 
-    data[myPanelIndex].Mypanel.list.splice(index,1); 
+    let Paneled = myPanelIndex ? 0 : 1; // 带新增元素的数组
+    data[Paneled].Mypanel.list.push(data[myPanelIndex].Mypanel.list[index]);
+    data[myPanelIndex].Mypanel.list.splice(index, 1);
     return data;
   }
   render() {
@@ -139,6 +140,9 @@ class App extends Component {
                 </TreeNode>
               </TreeNode>
             </Tree>
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="你不知道的Javacript上卷" key="4">
+            <JavaScriptTc></JavaScriptTc>
           </Tabs.TabPane>
         </Tabs>
       </div>
